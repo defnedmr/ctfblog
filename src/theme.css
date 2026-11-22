@@ -1,0 +1,123 @@
+/* All look & feel lives here. Change the variables to re-theme. */
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Patrick+Hand&display=swap');
+
+:root {
+  --bg: #4a3f2c;          /* page backdrop */
+  --wood: #7a4f35;        /* frame, header, sidebar */
+  --wood-dark: #4b2f20;
+  --paper: #fbf3e6;       /* content panel */
+  --card: #fffaf0;
+  --fg: #4b2f20;
+  --muted: #8a6f5e;
+  --accent: #b5544f;      /* rose */
+  --leaf: #7d8452;        /* olive */
+  --border: #d9c3a5;
+  --cream: #f6e6cc;
+  --code-bg: #3b2a22;
+  --font: 'Patrick Hand', 'Segoe UI', sans-serif;
+  --display: 'Chewy', 'Patrick Hand', sans-serif;
+  --mono: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --width: 1000px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; overflow-x: hidden; background: var(--bg) url('./bg.jpg'); /* tile at native size: no scaling */ color: var(--fg); font: 19px/1.55 var(--font); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.meta { color: var(--muted); font-size: .9rem; }
+
+/* header = wooden sign */
+header { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; position: sticky; top: 0; z-index: 2; padding: 10px 16px;
+  background: radial-gradient(circle, #f6e6cc2e 4px, transparent 4.5px) 0 0 / 36px 36px, radial-gradient(circle, #f6e6cc1f 4px, transparent 4.5px) 18px 18px / 36px 36px, var(--wood); border-bottom: 4px solid var(--wood-dark); box-shadow: 0 2px 0 #00000030; }
+header strong { font: 1.6rem var(--display); color: var(--cream); letter-spacing: .03em; }
+header .meta { color: #e7caa5; }
+header button { font-size: 1.2rem; background: var(--cream); border: 2px dashed var(--wood-dark); border-radius: 10px; color: var(--wood-dark); cursor: pointer; padding: 0 10px; }
+
+/* sidebar = wooden plank + timeline */
+.side { position: fixed; top: 62px; bottom: 0; left: 0; width: 220px; overflow-y: auto; padding: 16px; background: radial-gradient(circle, #f6e6cc2e 4px, transparent 4.5px) 0 0 / 36px 36px, radial-gradient(circle, #f6e6cc1f 4px, transparent 4.5px) 18px 18px / 36px 36px, var(--wood);
+  border-right: 4px solid var(--wood-dark); transform: translateX(-100%); transition: transform .2s; z-index: 1; }
+.open .side { transform: none; }
+.side a { color: var(--cream); }
+.side input { width: 100%; margin-bottom: 16px; }
+.group { margin-left: 6px; padding-left: 16px; border-left: 2px dashed #e7caa580; margin-bottom: 16px; }
+.month { font: .95rem var(--display); color: #e7caa5; letter-spacing: .05em; margin-bottom: 4px; }
+.entry { position: relative; padding: 2px 0; }
+.entry::before { content: ''; position: absolute; left: -23px; top: 12px; width: 8px; height: 8px; border-radius: 50%; background: var(--cream); }
+.entry a { display: block; cursor: pointer; }
+.entry a.on { font-weight: 700; text-decoration: underline; }
+.entry .chal { font-size: .95rem; color: #e7caa5; padding-left: 12px; }
+
+/* main = cream paper in a wood frame */
+main { max-width: min(var(--width), calc(100% - 112px)); margin: 24px auto 48px; padding: 24px 28px 40px; background: var(--paper);
+  border: 10px solid var(--wood); border-radius: 14px; outline: 2px dashed var(--border); outline-offset: -20px;
+  box-shadow: 0 6px 0 var(--wood-dark), 0 12px 24px #0006; transition: margin .2s; }
+@media (min-width: 801px) { .open main { max-width: min(var(--width), calc(100% - 332px)); margin-left: max(276px, calc(220px + (100% - 220px - var(--width)) / 2)); } }
+@media (max-width: 800px) { main { margin: 16px; padding: 20px 16px 32px; } }
+
+input, select { font: inherit; padding: 6px 12px; background: var(--card); color: var(--fg); border: 2px dashed var(--border); border-radius: 12px; }
+.card { display: block; padding: 14px 18px; margin-bottom: 14px; background: var(--card); border: 2px dashed var(--border); border-radius: 14px; color: var(--fg); }
+.card:hover { border-color: var(--accent); text-decoration: none; }
+.card h2 { margin: 0 0 2px; font: 1.5rem var(--display); color: var(--accent); }
+.tag { display: inline-block; margin: 8px 6px 0 0; padding: 0 10px; font-size: .85rem; background: #e6e8cf; color: var(--leaf); border: 1px solid var(--leaf); border-radius: 99px; }
+
+/* post */
+article h1 { margin: 0 0 4px; padding: 6px 16px; text-align: center; font: 2rem var(--display); color: var(--cream); background: var(--accent); border-radius: 99px; }
+article > .meta { text-align: center; margin-bottom: 16px; }
+article h2 { margin-top: 2.2rem; padding-top: 1rem; border-top: 2px dashed var(--border); scroll-margin-top: 80px;
+  font: 1.7rem var(--display); color: var(--wood); text-decoration: underline wavy var(--border); text-underline-offset: 6px; }
+article h2::before { content: '🍂 '; }
+article h3 { color: var(--leaf); font-size: 1.3rem; }
+/* photos: capped size, framed like a little sticker photo with stitched lining */
+article img { display: block; margin: 0; cursor: zoom-in; max-width: 320px; max-height: 240px; width: auto; height: auto;
+  padding: 10px; background: var(--card); border: 5px solid var(--wood); border-radius: 14px;
+  outline: 2px dashed var(--accent); outline-offset: -13px; box-shadow: 0 0 0 3px var(--cream), 5px 6px 0 3px var(--border); }
+article pre { background: var(--code-bg); border: 3px solid var(--wood); border-radius: 10px; padding: 14px; overflow-x: auto; }
+article .hljs { background: transparent; }
+article code { font-family: var(--mono); font-size: .85em; }
+article :not(pre) > code { background: #efe0c8; color: var(--wood-dark); padding: 2px 6px; border-radius: 6px; }
+article table { border-collapse: collapse; width: fit-content; max-width: 100%; margin: 8px 0; }
+article th, article td { border: 2px dashed var(--border); padding: 4px 14px; width: auto; }
+article th { background: #efe0c8; }
+article blockquote { margin-left: 0; padding-left: 16px; border-left: 4px solid var(--leaf); color: var(--muted); }
+
+/* challenge tags */
+.chips { margin-bottom: 16px; }
+.chips .tag { margin: 0 6px 6px 0; font: inherit; font-size: .85rem; cursor: pointer; }
+.chips .tag.on { background: var(--accent); color: var(--cream); border-color: var(--cream); }
+.chal small { color: #e7caa5aa; }
+article h2 .tag { margin: 0 0 0 10px; vertical-align: middle; font: .85rem var(--font); text-decoration: none; display: inline-block; }
+
+/* stickers */
+.stk { position: absolute; height: auto; pointer-events: none; z-index: 1; filter: drop-shadow(0 2px 2px #0005); }
+main { position: relative; }
+@media (max-width: 800px) { .stk { display: none; } }
+
+/* CTF description (frontmatter `description:`) */
+.desc { margin: 12px 0 8px; padding: 12px 18px; background: var(--card); border: 2px dashed var(--border); border-radius: 14px; font-style: italic; }
+
+/* photo enlarge button + popup */
+.pic { position: relative; display: block; margin: 12px 6px; }
+.zoom { position: absolute; right: 12px; bottom: 12px; padding: 0 8px; font-size: 1rem; cursor: pointer; background: var(--cream); border: 2px solid var(--wood); border-radius: 99px; }
+.lightbox { position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; background: #000000b8; cursor: zoom-out; }
+article .lightbox img { max-width: 92vw; max-height: 90vh; cursor: zoom-out; }
+
+/* consecutive photos sit side by side when there is room, otherwise they wrap and stay centred */
+article { text-align: center; }
+article > * { text-align: left; }
+article > p:has(> .pic:only-child) { display: inline-block; margin: 0; vertical-align: top; }
+@media (max-width: 420px) { article img { max-width: 100%; } }
+
+
+/* long unbroken strings (ciphertext, hashes) must wrap instead of widening the page */
+article { overflow-wrap: anywhere; }
+
+/* scrapbook touch: a strip of washi tape on every photo */
+.pic::before { content: ''; position: absolute; z-index: 1; top: -4px; left: 50%; width: 76px; height: 24px; pointer-events: none;
+  transform: translateX(-50%) rotate(-3deg);
+  background: repeating-linear-gradient(45deg, #e8a99e99 0 7px, #f6e6cccc 7px 14px); border-left: 2px dashed #ffffff99; border-right: 2px dashed #ffffff99; }
+
+/* pinned welcome note on the home page */
+.welcome { position: relative; margin: 10px 0 18px; padding: 6px 16px 1px; font-size: .85em; line-height: 1.4; background: var(--card); border: 2px dashed var(--accent); border-radius: 14px; }
+/* pin: a little rose thumbtack head */
+.welcome::before { content: ''; position: absolute; top: -9px; right: 22px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--wood-dark);
+  background: radial-gradient(circle at 35% 35%, #fff4ec 0 12%, #e58f87 14%, var(--accent) 70%); box-shadow: 2px 3px 0 #0003; }
+.welcome h2 { margin: 0; font: 1.3rem var(--display); color: var(--accent); }
