@@ -2,7 +2,7 @@
 title: WolvCTF 2026
 date: 2026-11-23
 tags: web, crypto, osint, forensics
-description: I'm excited to share my first writeup, in second CTF I've participated in. I think question quality was great, there's plenty of questions from each difficulty/topic. The questions I've answered are at most medium difficulty and I'm aware, though I still wanted to start writing as a way of motivating myself and maybe others :)
+description: I'm excited to share my first writeup, in second CTF I've participated in. I think question quality was great, there's plenty of questions from each difficulty/topic. I wish success to authors, and I will be voting positively on CTFTime.
 ---
 
 ## spoofify [web]
@@ -19,10 +19,16 @@ We are given the server.js file and the description "An authentication service a
 
 ![pasted-image-20261121133357.png](img/wolvctf2026/pasted-image-20261121133357.png)
 
+## StickyNotes [web]
+
+Site works as a note taker and it only takes a username to view the notes. We test with a username and add a note to see how system works. Notes are opened in the path ../notes/{note-id}. Correct answer lies in /notes/1. (I tried /admin and site said "Nice Try"..)
+
+![stickynotes.png](img/wolvctf2026/stickynotes.png)
+
 ## On the Rail Fence [crypto]
 Given the string "H!hcsiH!hnrheiatcaedaeatetvaateqiesliohnemntealtteitrvlataltteoq'igeosalHi!oihgnhlaesnbsHi!ohvcosainHi!ohcnurnhreHi!altMcia,hcaposfhWs!iovoaniocunrH!lMiterdtltirltlto'goaH!igthioet", it is apparently a 3-rail rail fence cipher, and the song name The Victors is the answer (wctf{the-victors}).
 
-## maize poster [stego]
+## maize poster [crypto]
 Our hint says "If you squint really closely at the pixels you might find it.", pointing at some pixel differences. Exactly 103 pixels are a very slightly different blue from the rest of the poster (normal navy (0,39,76), different navy (0,39,77)). If we read the pixels in row-major order, putting 0 for blue 76 and 1 for blue 77, we can read the result as ASCII. Decoding that with ROT13 gives wctf{r0t13_1n_th3_blu3}.
 
 ![poster.png](img/wolvctf2026/poster.png)
